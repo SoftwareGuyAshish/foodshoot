@@ -6,6 +6,7 @@ import { IoArrowForwardCircleOutline } from "react-icons/io5";
 const Hero = () => {
   return (
     <div className="grid grid-cols-4 p-2 m-2">
+      {/* Text Section */}
       <div className="md:p-1 md:m-1 col-span-4 md:col-span-2">
         <h2 className="text-4xl font-semibold mb-6 md:px-2 mx-2">
           Capture <br />
@@ -13,9 +14,8 @@ const Hero = () => {
           : <br /> Order Online!
         </h2>
         <p className="text-base font-light text-gray-200 mb-6 md:px-2 ml-2 md:mr-6">
-          Embark on a culinary journey with FoodShoot! Explore a diverse menu
-          crafted with passion. Order now for an experience that brings vibrant
-          Indian tastes to your doorstep!
+          Explore a diverse menu crafted with passion. Order now for an
+          experience that brings vibrant Indian tastes to your doorstep!
         </p>
         <div className="flex flex-wrap gap-4 md:p-2 m-2 items-center">
           <Button
@@ -37,11 +37,11 @@ const Hero = () => {
           </Button>
         </div>
       </div>
-      <div className="relative hidden md:block col-span-2 ">
+      <div className="relative hidden md:block col-span-2 min-h-[400px]">
         <Image
           src={"/pizza.png"}
           layout={"fill"}
-          objectFit={"contain"}
+          className="object-contain "
           alt={"pizza"}
         />
       </div>
