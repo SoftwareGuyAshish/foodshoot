@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #000 !important;
+  min-height: 100vh;
+}
+
 header {
   max-width: 1536px !important;
 }

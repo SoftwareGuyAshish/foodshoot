@@ -32,7 +32,6 @@ export default function App() {
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         />
       </NavbarContent>
-
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
           <span className="text-primary font-semibold text-3xl">
@@ -76,10 +75,10 @@ export default function App() {
 
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
+          <Link href="/signin">Sign In</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="warning" href="#" variant="flat">
+          <Button as={Link} color="warning" variant="flat" href="/signup">
             Sign Up
           </Button>
         </NavbarItem>
