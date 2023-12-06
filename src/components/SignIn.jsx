@@ -30,7 +30,7 @@ const SignIn = () => {
             required
             className="mb-2"
           />
-          <Button type="submit" className="hover:bg-primary">
+          <Button type="submit" className="bg-primary hover:!opacity-75">
             Sign In with Email
           </Button>
           <span>
@@ -46,7 +46,7 @@ const SignIn = () => {
       <Divider className="my-5" />
       <div
         onClick={handleGoogleSignUp}
-        className="flex items-center justify-center gap-2 w-full bg-white text-black font-semibold p-3 rounded-xl hover:cursor-pointer hover:bg-zinc-300"
+        className="flex items-center justify-center gap-2 w-full bg-white text-black font-semibold p-3 rounded-xl hover:cursor-pointer hover:opacity-75"
       >
         <Image
           className="object-contain"

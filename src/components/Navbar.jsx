@@ -59,7 +59,7 @@ export default function App() {
           </span>
         </NavbarBrand>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="/">
             Home
           </Link>
         </NavbarItem>
