@@ -1,6 +1,7 @@
 "use client";
 import { Button, Card, Divider, Input, Spacer } from "@nextui-org/react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const SignUp = () => {
@@ -33,6 +34,12 @@ const SignUp = () => {
           <Button type="submit" className="hover:bg-primary">
             Sign Up with Email
           </Button>
+          <span>
+            Already have an account,{" "}
+            <Link href={"/signin"} className="text-primary">
+              Sign In
+            </Link>
+          </span>
         </form>
 
         {/* Google signup */}

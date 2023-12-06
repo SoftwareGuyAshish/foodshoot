@@ -15,14 +15,26 @@ import React from "react";
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const menuItems = [
+  const menuItem = [
     "Home",
     "Menu",
     "About",
     "Contact",
     "Profile",
     "Cart",
+    "Sign In",
     "Log Out",
+  ];
+
+  const menuItems = [
+    { name: "Home", href: "/" },
+    { name: "Menu", href: "#" },
+    { name: "About", href: "#" },
+    { name: "Contact", href: "#" },
+    { name: "Profile", href: "#" },
+    { name: "Cart", href: "#" },
+    { name: "Sign In", href: "/signin" },
+    { name: "Sign Out", href: "#" },
   ];
 
   return (
@@ -96,10 +108,10 @@ export default function App() {
                   ? "danger"
                   : "foreground"
               }
-              href="#"
+              href={item.href}
               size="lg"
             >
-              {item}
+              {item.name}
             </Link>
           </NavbarMenuItem>
         ))}
