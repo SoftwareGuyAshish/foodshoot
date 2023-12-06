@@ -12,19 +12,8 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 
-export default function App() {
+export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  const menuItem = [
-    "Home",
-    "Menu",
-    "About",
-    "Contact",
-    "Profile",
-    "Cart",
-    "Sign In",
-    "Log Out",
-  ];
 
   const menuItems = [
     { name: "Home", href: "/" },

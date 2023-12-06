@@ -4,7 +4,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 
-import Navbar from "@/components/Navbar";
+import NavBar from "@/components/Navbar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
       <body className={poppins.className} style={{ backgroud: "#000" }}>
         <NextUIProvider>
           <main className="dark text-foreground bg-background container">
-            <Navbar />
+            <NavBar />
             {children}
             <Footer />
           </main>
