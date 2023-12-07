@@ -2,9 +2,13 @@
 import { Button, Card, Divider, Input, Spacer } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const SignUp = () => {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleEmailSignUp = (event) => {
     // Handle email signup logic
     event.preventDefault();
@@ -22,7 +26,15 @@ const SignUp = () => {
 
         {/* Email/Password signup */}
         <form onSubmit={handleEmailSignUp} className="flex flex-col gap-4">
-          <Input label="Full Name" name="fullName" required />
+          <Input
+            label="Full Name"
+            name="fullName"
+            required
+            onChange={(ev) => {
+              setFullName(ev.target.value);
+              console.log(fullName);
+            }}
+          />
           <Input type="email" label="Email" name="email" required />
           <Input
             type="password"
