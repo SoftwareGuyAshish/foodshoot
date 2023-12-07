@@ -17,8 +17,8 @@ export default function NavBar() {
 
   const menuItems = [
     { name: "Home", href: "/" },
-    { name: "Menu", href: "#" },
-    { name: "About", href: "#" },
+    { name: "Menu", href: "/menu" },
+    { name: "About", href: "/about" },
     { name: "Contact", href: "#" },
     { name: "Profile", href: "#" },
     { name: "Cart", href: "#" },
@@ -43,22 +43,22 @@ export default function NavBar() {
 
       <NavbarContent className="hidden sm:flex gap-4 " justify="center">
         <NavbarBrand>
-          <span className="text-primary font-semibold text-3xl">
+          <Link className="text-primary font-semibold text-3xl" href="/">
             FoodShoot{" "}
-          </span>
+          </Link>
         </NavbarBrand>
         <NavbarItem>
           <Link color="foreground" href="/">
             Home
           </Link>
         </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
+        <NavbarItem>
+          <Link href="/menu" color="foreground">
             Menu
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
+        <NavbarItem isActive>
+          <Link href="/about" aria-current="page">
             About
           </Link>
         </NavbarItem>

@@ -13,7 +13,9 @@ const FoodCard = ({ food }) => {
   return (
     <Card className="py-2 my-1 px-2 md:px-0 col-span-1 hover:bg-black hover:shadow-shadowPrimary hover:scale-[1.01]">
       <CardHeader className="pb-1 pt-2 px-4 flex-col items-start">
-        <p className="text-tiny uppercase font-bold">{food.restaurant}</p>
+        <p className="text-tiny uppercase font-semibold mb-1">
+          {food.restaurant}
+        </p>
         <div className="flex justify-between w-full">
           <h4 className="font-bold text-large">{food.name}</h4>
           <div className="flex items-center justify-center text-yellow-400 gap-1">

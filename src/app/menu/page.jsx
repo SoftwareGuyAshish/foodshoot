@@ -1,11 +1,12 @@
-import Hero from "@/components/layouts/Hero";
 import Listing from "@/components/layouts/Listing";
+import React from "react";
 
-export default function Home() {
+const page = () => {
   return (
     <div>
-      <Hero />
       <Listing />
     </div>
   );
-}
+};
+
+export default page;

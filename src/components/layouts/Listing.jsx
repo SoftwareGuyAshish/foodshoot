@@ -47,7 +47,7 @@ const Listing = () => {
       name: "Chicken Pizza",
       photoURL:
         "https://images.pexels.com/photos/3944311/pexels-photo-3944311.jpeg?auto=compress&cs=tinysrgb&w=600",
-      restaurant: "KFC",
+      restaurant: "FoodShoot Restaurant",
       rating: "4.2",
       price: "320",
     },
