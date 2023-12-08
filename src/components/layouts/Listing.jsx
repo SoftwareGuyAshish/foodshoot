@@ -39,7 +39,7 @@ const Listing = () => {
       name: "Brownee",
       photoURL:
         "https://images.pexels.com/photos/2955818/pexels-photo-2955818.jpeg?auto=compress&cs=tinysrgb&w=600",
-      restaurant: "KFC",
+      restaurant: "Sweet Riya",
       rating: "4.2",
       price: "320",
     },
@@ -70,7 +70,7 @@ const Listing = () => {
   ];
 
   return (
-    <div className="p-4 mx-2">
+    <div className="p-1 md:p-4 mx-2">
       <div className="flex flex-col items-center md:flex-row justify-center mt-5 mb-3 gap-3">
         <h2 className="font-light text-4xl text-gray-200">Check Out</h2>
         <h2 className="font-semibold text-4xl text-primary"> Our Menu!</h2>

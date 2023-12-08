@@ -11,7 +11,7 @@ const Hero = () => {
         <h2 className="text-4xl font-semibold mb-6 md:px-2 mx-2">
           Capture <br />
           the Taste <br /> with <span className="text-primary">FoodShoot</span>
-          : <br /> Order Online!
+          <br /> Order Online!
         </h2>
         <p className="text-base font-light text-gray-200 mb-6 md:px-2 ml-2 md:mr-6">
           Explore a diverse menu crafted with passion. Order now for an

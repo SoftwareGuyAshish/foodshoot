@@ -12,7 +12,25 @@ const SignUp = () => {
   const handleEmailSignUp = (event) => {
     // Handle email signup logic
     event.preventDefault();
+    // Check if email and password are not empty
+    if (!email.trim() || !password.trim()) {
+      // Handle case where email or password is empty
+      console.error("Email and password are required");
+      return;
+    }
     // Add your logic here for email signup
+    fetch("/api/register", {
+      method: "POST",
+      body: JSON.stringify({
+        fullName,
+        email,
+        password,
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
+    setFullName("");
+    setEmail("");
+    setPassword("");
   };
 
   const handleGoogleSignUp = () => {
@@ -29,27 +47,40 @@ const SignUp = () => {
           <Input
             label="Full Name"
             name="fullName"
+            value={fullName}
             required
-            onChange={(ev) => {
-              setFullName(ev.target.value);
-              console.log(fullName);
+            onChange={(e) => {
+              setFullName(e.target.value);
             }}
           />
-          <Input type="email" label="Email" name="email" required />
+          <Input
+            type="email"
+            label="Email"
+            name="email"
+            value={email}
+            required
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
           <Input
             type="password"
             label="Password"
             name="password"
+            value={password}
             required
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             className="mb-2"
           />
           <Button type="submit" className="bg-primary hover:!opacity-75">
             Sign Up with Email
           </Button>
           <span>
-            Already have an account,{" "}
+            Already have an account?,{" "}
             <Link href={"/signin"} className="text-primary">
-              Sign In
+              Sign In Page
             </Link>
           </span>
         </form>

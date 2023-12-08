@@ -19,7 +19,7 @@ export default function NavBar() {
     { name: "Home", href: "/" },
     { name: "Menu", href: "/menu" },
     { name: "About", href: "/about" },
-    { name: "Contact", href: "#" },
+    { name: "Contact", href: "/contact" },
     { name: "Profile", href: "#" },
     { name: "Cart", href: "#" },
     { name: "Sign In", href: "/signin" },
@@ -40,10 +40,12 @@ export default function NavBar() {
           </span>
         </NavbarBrand>
       </NavbarContent>
-
       <NavbarContent className="hidden sm:flex gap-4 " justify="center">
         <NavbarBrand>
-          <Link className="text-primary font-semibold text-3xl" href="/">
+          <Link
+            className="text-primary font-semibold text-3xl hover:scale-[1.02]"
+            href="/"
+          >
             FoodShoot{" "}
           </Link>
         </NavbarBrand>
@@ -57,13 +59,13 @@ export default function NavBar() {
             Menu
           </Link>
         </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="/about" aria-current="page">
+        <NavbarItem>
+          <Link href="/about" color="foreground">
             About
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="/contact">
             Contact
           </Link>
         </NavbarItem>

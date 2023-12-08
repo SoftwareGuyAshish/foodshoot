@@ -2,13 +2,26 @@
 import { Button, Card, Divider, Input, Spacer } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const SignIn = () => {
-  const handleEmailSignUp = (event) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleEmailSignIn = (event) => {
     // Handle email signup logic
     event.preventDefault();
+    // Check if email and password are not empty
+    if (!email.trim() || !password.trim()) {
+      // Handle case where email or password is empty
+      console.error("Email and password are required");
+      return;
+    }
     // Add your logic here for email signup
+    console.log(email);
+    console.log(password);
+    setEmail("");
+    setPassword("");
   };
 
   const handleGoogleSignUp = () => {
@@ -21,22 +34,35 @@ const SignIn = () => {
         <h2 className="text-primary text-3xl font-semibold">Sign In</h2>
 
         {/* Email/Password signup */}
-        <form onSubmit={handleEmailSignUp} className="flex flex-col gap-4">
-          <Input type="email" label="Email" name="email" required />
+        <form onSubmit={handleEmailSignIn} className="flex flex-col gap-4">
+          <Input
+            type="email"
+            label="Email"
+            name="email"
+            value={email}
+            required
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
           <Input
             type="password"
             label="Password"
             name="password"
+            value={password}
             required
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             className="mb-2"
           />
           <Button type="submit" className="bg-primary hover:!opacity-75">
             Sign In with Email
           </Button>
           <span>
-            {`Don't have an account,`}{" "}
+            {`Don't have an account?,`}{" "}
             <Link href={"/signup"} className="text-primary">
-              Sign Up
+              Sign Up Page
             </Link>
           </span>
         </form>
