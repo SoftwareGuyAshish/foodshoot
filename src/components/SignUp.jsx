@@ -13,13 +13,24 @@ const SignUp = () => {
   const handleEmailSignUp = async (event) => {
     // Handle email signup logic
     event.preventDefault();
+    //Custom Dynamic Toast
+    const signUpToast = () => {
+      toast.info("Singing Up...", {
+        toastId: "signUpToast",
+      });
+    };
+    signUpToast();
     // Check if email and password are not empty
     if (!email.trim() || password.trim().length < 6) {
       // Handle case where email or password is empty
       console.error(
         "Email and password are required and password must be atleast 6 characters long "
       );
-      toast.error("Email and password (atleast 6 characters) required");
+      toast.update("signUpToast", {
+        render: "Email and password (atleast 6 characters) required",
+        type: toast.TYPE.ERROR,
+        autoClose: 5000,
+      });
       return;
     }
     // Add your logic here for email signup
@@ -33,12 +44,20 @@ const SignUp = () => {
       headers: { "Content-Type": "application/json" },
     });
     if (response.ok) {
-      toast.success("Signed Up Successfully");
+      toast.update("signUpToast", {
+        render: "Signed Up Successfully",
+        type: toast.TYPE.SUCCESS,
+        autoClose: 5000,
+      });
       setFullName("");
       setEmail("");
       setPassword("");
     } else {
-      toast.error("Server Error");
+      toast.update("signUpToast", {
+        render: "Server Error",
+        type: toast.TYPE.ERROR,
+        autoClose: 5000,
+      });
     }
   };
 
