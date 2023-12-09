@@ -8,18 +8,25 @@ const SignUp = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const handleEmailSignUp = (event) => {
+  const handleEmailSignUp = async (event) => {
     // Handle email signup logic
     event.preventDefault();
+    setError(false);
+    setSuccess(false);
     // Check if email and password are not empty
-    if (!email.trim() || !password.trim()) {
+    if (!email.trim() || password.trim().length < 6) {
       // Handle case where email or password is empty
-      console.error("Email and password are required");
+      console.error(
+        "Email and password are required and password must be atleast 6 characters long "
+      );
+      setError(true);
       return;
     }
     // Add your logic here for email signup
-    fetch("/api/register", {
+    const response = await fetch("/api/register", {
       method: "POST",
       body: JSON.stringify({
         fullName,
@@ -28,9 +35,14 @@ const SignUp = () => {
       }),
       headers: { "Content-Type": "application/json" },
     });
-    setFullName("");
-    setEmail("");
-    setPassword("");
+    if (response.ok) {
+      setSuccess(true);
+      setFullName("");
+      setEmail("");
+      setPassword("");
+    } else {
+      setError(true);
+    }
   };
 
   const handleGoogleSignUp = () => {
@@ -41,7 +53,18 @@ const SignUp = () => {
     <div className="my-5">
       <Card className="text-center p-6 gap-5">
         <h2 className="text-primary text-3xl font-semibold">Sign Up</h2>
+        {/* Temperory Messages */}
+        {error && (
+          <div className="bg-red-900 w-full text-red-300 font-semibold py-2 border border-red-300 rounded-2xl">
+            Something Went Wrong! Try Again
+          </div>
+        )}
 
+        {success && (
+          <div className="bg-green-800 w-full text-green-400 font-semibold py-2 border border-green-400 rounded-2xl">
+            Successfully Signed Up
+          </div>
+        )}
         {/* Email/Password signup */}
         <form onSubmit={handleEmailSignUp} className="flex flex-col gap-4">
           <Input

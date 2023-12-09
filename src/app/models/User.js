@@ -1,4 +1,5 @@
 const { Schema, models, model } = require("mongoose");
+import bcrypt from "bcryptjs";
 
 const UserSchema = new Schema(
   {
@@ -7,15 +8,17 @@ const UserSchema = new Schema(
     password: {
       type: String,
       required: true,
-      validate: (pass) => {
-        if (pass?.length || pass.length < 6) {
-          new Error("Password must be 6 characters long");
-        }
-        pass;
-      },
+      minlength: 6,
     },
   },
   { timestamps: true }
 );
+
+// Use a pre-save hook to hash the password before saving
+UserSchema.post("validate", function (user) {
+  const plainPass = user.password;
+  const salt = bcrypt.genSaltSync(10);
+  user.password = bcrypt.hashSync(plainPass, salt);
+});
 
 export const User = models?.User || model("User", UserSchema);
