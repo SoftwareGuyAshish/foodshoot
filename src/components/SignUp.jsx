@@ -2,13 +2,47 @@
 import { Button, Card, Divider, Input, Spacer } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const SignUp = () => {
-  const handleEmailSignUp = (event) => {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const handleEmailSignUp = async (event) => {
     // Handle email signup logic
     event.preventDefault();
+    setError(false);
+    setSuccess(false);
+    // Check if email and password are not empty
+    if (!email.trim() || password.trim().length < 6) {
+      // Handle case where email or password is empty
+      console.error(
+        "Email and password are required and password must be atleast 6 characters long "
+      );
+      setError(true);
+      return;
+    }
     // Add your logic here for email signup
+    const response = await fetch("/api/register", {
+      method: "POST",
+      body: JSON.stringify({
+        fullName,
+        email,
+        password,
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
+    if (response.ok) {
+      setSuccess(true);
+      setFullName("");
+      setEmail("");
+      setPassword("");
+    } else {
+      setError(true);
+    }
   };
 
   const handleGoogleSignUp = () => {
@@ -19,25 +53,57 @@ const SignUp = () => {
     <div className="my-5">
       <Card className="text-center p-6 gap-5">
         <h2 className="text-primary text-3xl font-semibold">Sign Up</h2>
+        {/* Temperory Messages */}
+        {error && (
+          <div className="bg-red-900 w-full text-red-300 font-semibold py-2 border border-red-300 rounded-2xl">
+            Something Went Wrong! Try Again
+          </div>
+        )}
 
+        {success && (
+          <div className="bg-green-800 w-full text-green-400 font-semibold py-2 border border-green-400 rounded-2xl">
+            Successfully Signed Up
+          </div>
+        )}
         {/* Email/Password signup */}
         <form onSubmit={handleEmailSignUp} className="flex flex-col gap-4">
-          <Input label="Full Name" name="fullName" required />
-          <Input type="email" label="Email" name="email" required />
+          <Input
+            label="Full Name"
+            name="fullName"
+            value={fullName}
+            required
+            onChange={(e) => {
+              setFullName(e.target.value);
+            }}
+          />
+          <Input
+            type="email"
+            label="Email"
+            name="email"
+            value={email}
+            required
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
           <Input
             type="password"
             label="Password"
             name="password"
+            value={password}
             required
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             className="mb-2"
           />
           <Button type="submit" className="bg-primary hover:!opacity-75">
             Sign Up with Email
           </Button>
           <span>
-            Already have an account,{" "}
+            Already have an account?,{" "}
             <Link href={"/signin"} className="text-primary">
-              Sign In
+              Sign In Page
             </Link>
           </span>
         </form>
