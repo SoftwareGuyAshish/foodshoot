@@ -3,6 +3,8 @@ import Footer from "@/components/Footer";
 import NavBar from "@/components/Navbar";
 import { NextUIProvider } from "@nextui-org/react";
 import { Poppins } from "next/font/google";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -17,6 +19,7 @@ export default function RootLayout({ children }) {
         <title>FoodShoot</title>
       </head>
       <body className={poppins.className} style={{ backgroud: "#000" }}>
+        <ToastContainer position="top-right" newestOnTop theme="dark" />
         <NextUIProvider>
           <main className="dark text-foreground bg-background container">
             <NavBar />
