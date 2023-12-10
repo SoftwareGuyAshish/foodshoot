@@ -49,9 +49,10 @@ const SignUp = () => {
         type: toast.TYPE.SUCCESS,
         autoClose: 5000,
       });
-      setFullName("");
-      setEmail("");
-      setPassword("");
+      //TODO: Update in final production
+      // setFullName("");
+      // setEmail("");
+      // setPassword("");
     } else {
       toast.update("signUpToast", {
         render: "Server Error",
