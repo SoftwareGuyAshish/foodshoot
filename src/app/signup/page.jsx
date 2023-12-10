@@ -1,7 +1,6 @@
 "use client";
 import SignUp from "@/components/SignUp";
 import React from "react";
-import { ToastContainer } from "react-toastify";
 
 const page = () => {
   return (

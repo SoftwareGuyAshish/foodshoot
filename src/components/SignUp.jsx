@@ -34,15 +34,19 @@ const SignUp = () => {
       return;
     }
     // Add your logic here for email signup
-    const response = await fetch("/api/register", {
-      method: "POST",
-      body: JSON.stringify({
-        fullName,
-        email,
-        password,
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
+    //Vercel URL to make it work on deployment -  not needed for local
+    const response = await fetch(
+      "https://foodshoot.vercel.app" + "/api/register",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          fullName,
+          email,
+          password,
+        }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     if (response.ok) {
       toast.update("signUpToast", {
         render: "Signed Up Successfully",
