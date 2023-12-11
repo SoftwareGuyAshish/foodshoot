@@ -35,6 +35,7 @@ const SignUp = () => {
     }
     // Add your logic here for email signup
     const response = await fetch("/api/register", {
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
       method: "POST",
       body: JSON.stringify({
         fullName,
