@@ -2,6 +2,7 @@
 import { Button, Card, Divider, Input, Spacer } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -9,6 +10,7 @@ const SignUp = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleEmailSignUp = async (event) => {
     // Handle email signup logic
@@ -34,7 +36,7 @@ const SignUp = () => {
       return;
     }
     // Add your logic here for email signup
-    const response = await fetch("/api/register", {
+    const response = await fetch("api/register", {
       next: { revalidate: 60 }, // Revalidate every 60 seconds
       method: "POST",
       body: JSON.stringify({
@@ -50,6 +52,7 @@ const SignUp = () => {
         type: toast.TYPE.SUCCESS,
         autoClose: 5000,
       });
+      router.push("/signin");
       //TODO: Update in final production
       // setFullName("");
       // setEmail("");

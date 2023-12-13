@@ -1,11 +1,12 @@
-"use client";
+// "use client";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/Navbar";
-import { NextUIProvider } from "@nextui-org/react";
 import { Poppins } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthProvider from "./context/AuthContext";
 import "./globals.css";
+import { UiProviders } from "./provider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -20,13 +21,15 @@ export default function RootLayout({ children }) {
       </head>
       <body className={poppins.className} style={{ backgroud: "#000" }}>
         <ToastContainer position="top-right" newestOnTop theme="dark" />
-        <NextUIProvider>
-          <main className="dark text-foreground bg-background container">
-            <NavBar />
-            {children}
-            <Footer />
-          </main>
-        </NextUIProvider>
+        <AuthProvider>
+          <UiProviders>
+            <main className="dark text-foreground bg-background lg:container">
+              <NavBar />
+              {children}
+              <Footer />
+            </main>
+          </UiProviders>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -1,4 +1,4 @@
-"use client";
+"use server";
 import SignUp from "@/components/SignUp";
 import React from "react";
 

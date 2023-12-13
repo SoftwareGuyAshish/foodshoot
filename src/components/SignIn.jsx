@@ -1,39 +1,57 @@
 "use client";
-import { Button, Card, Divider, Input, Spacer } from "@nextui-org/react";
+import { Button, Card, Divider, Input } from "@nextui-org/react";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const handleEmailSignIn = (event) => {
-    // Handle email signup logic
-    event.preventDefault();
-    // Check if email and password are not empty
-    if (!email.trim() || !password.trim()) {
-      // Handle case where email or password is empty
-      console.error("Email and password are required");
-      return;
+  const handleEmailSignIn = async (e) => {
+    e.preventDefault();
+    //Custom Dynamic Toast
+    const signInToast = () => {
+      toast.info("Singing In...", {
+        toastId: "signInToast",
+      });
+    };
+    signInToast();
+    const response = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+    if (response.ok) {
+      router.push("/");
+      console.log(response);
+      toast.update("signInToast", {
+        render: "Signed In Successfully",
+        type: toast.TYPE.SUCCESS,
+        autoClose: 5000,
+      });
+    } else {
+      toast.update("signInToast", {
+        render: "Invalid Credentials",
+        type: toast.TYPE.ERROR,
+        autoClose: 5000,
+      });
     }
-    // Add your logic here for email signup
-    console.log(email);
-    console.log(password);
-    setEmail("");
-    setPassword("");
   };
 
-  const handleGoogleSignUp = () => {
-    // Handle Google signup logic
-    // Add your logic here for Google signup
+  const handleGoogleSignIn = () => {
+    // Handle Google signin logic
+    // Add your logic here for Google signin
   };
   return (
     <div className="my-5">
-      <Card className="text-center p-6 gap-5 my-5">
+      <Card className="text-center p-6 gap-5">
         <h2 className="text-primary text-3xl font-semibold">Sign In</h2>
-
-        {/* Email/Password signup */}
+        {/* Email/Password signin */}
         <form onSubmit={handleEmailSignIn} className="flex flex-col gap-4">
           <Input
             type="email"
@@ -60,18 +78,18 @@ const SignIn = () => {
             Sign In with Email
           </Button>
           <span>
-            {`Don't have an account?,`}{" "}
+            {`Don't have an account?`},{" "}
             <Link href={"/signup"} className="text-primary">
               Sign Up Page
             </Link>
           </span>
         </form>
 
-        {/* Google signup */}
+        {/* Google signin */}
       </Card>
       <Divider className="my-5" />
       <div
-        onClick={handleGoogleSignUp}
+        onClick={handleGoogleSignIn}
         className="flex items-center justify-center gap-2 w-full bg-white text-black font-semibold p-3 rounded-xl hover:cursor-pointer hover:opacity-75"
       >
         <Image

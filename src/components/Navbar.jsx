@@ -9,21 +9,25 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
+  Skeleton,
 } from "@nextui-org/react";
-import React from "react";
+import { signOut, useSession } from "next-auth/react";
+import React, { useState } from "react";
 
 export default function NavBar() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const session = useSession();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const menuItems = [
     { name: "Home", href: "/" },
     { name: "Menu", href: "/menu" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
-    { name: "Profile", href: "#" },
+    session.status == "unauthenticated"
+      ? { name: "Sign In", href: "/signin" }
+      : { name: "Profile", href: "/profile" },
     { name: "Cart", href: "#" },
-    { name: "Sign In", href: "/signin" },
-    { name: "Sign Out", href: "#" },
   ];
 
   return (
@@ -69,36 +73,54 @@ export default function NavBar() {
             Contact
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Profile
-          </Link>
-        </NavbarItem>
       </NavbarContent>
-
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="/signin">Sign In</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="warning" variant="flat" href="/signup">
-            Sign Up
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
+      {session.status == "loading" && (
+        <NavbarContent justify="end">
+          <NavbarItem className="hidden md:flex">
+            <Skeleton className=" rounded-xl">
+              <Link href="/profile">Sign In Here</Link>
+            </Skeleton>
+          </NavbarItem>
+          <NavbarItem>
+            <Skeleton className=" rounded-xl">
+              <Button color="danger" variant="flat" onClick={() => signOut()}>
+                Sign Out
+              </Button>
+            </Skeleton>
+          </NavbarItem>
+        </NavbarContent>
+      )}
+      {session.status == "authenticated" && (
+        <NavbarContent justify="end">
+          <NavbarItem className="hidden md:flex">
+            <Link href="/profile">Hi, {session.data.user?.email}</Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Button color="danger" variant="flat" onClick={() => signOut()}>
+              Sign Out
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
+      )}
+      {session.status == "unauthenticated" && (
+        <NavbarContent justify="end">
+          <NavbarItem className="hidden md:flex">
+            <Link href="/signin">Sign In</Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Button as={Link} color="warning" variant="flat" href="/signup">
+              Sign Up
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
+      )}
 
       <NavbarMenu className="dark">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               className="w-full"
-              color={
-                index === 2
-                  ? "warning"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
+              color={"foreground"}
               href={item.href}
               size="lg"
             >
