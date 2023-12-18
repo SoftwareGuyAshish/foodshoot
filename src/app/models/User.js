@@ -1,5 +1,6 @@
 const { Schema, models, model } = require("mongoose");
 import bcrypt from "bcryptjs";
+import { type } from "os";
 
 const UserSchema = new Schema(
   {
@@ -10,6 +11,10 @@ const UserSchema = new Schema(
       required: true,
       minlength: 6,
     },
+    avatar: { type: String },
+    addresses: { type: Array },
+    orders: { type: Array },
+    cart: { type: Array },
   },
   { timestamps: true }
 );

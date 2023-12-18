@@ -22,6 +22,7 @@ const handler = NextAuth({
         //Searching for the user in DB
         const user = await User.findOne({ email });
         //Checking for the credentials for the user
+        console.log(user);
         const authenticated =
           user && bcrypt.compareSync(password, user.password);
         console.log(authenticated);
