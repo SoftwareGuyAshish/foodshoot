@@ -1,5 +1,6 @@
 "use client";
 import {
+  Avatar,
   Button,
   Link,
   Navbar,
@@ -17,7 +18,6 @@ import React, { useState } from "react";
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const session = useSession();
-  const [isLoaded, setIsLoaded] = useState(false);
 
   const menuItems = [
     { name: "Home", href: "/" },
@@ -32,14 +32,14 @@ export default function NavBar() {
 
   return (
     <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
-      <NavbarContent className="sm:hidden px-4" justify="start">
+      <NavbarContent className="sm:hidden px-1" justify="start">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         />
       </NavbarContent>
-      <NavbarContent className="sm:hidden pr-3" justify="center">
+      <NavbarContent className="sm:hidden mr-2" justify="center">
         <NavbarBrand>
-          <span className="text-primary font-semibold text-3xl">
+          <span className="text-primary font-semibold mx-auto text-3xl">
             FoodShoot{" "}
           </span>
         </NavbarBrand>
@@ -91,14 +91,25 @@ export default function NavBar() {
         </NavbarContent>
       )}
       {session.status == "authenticated" && (
-        <NavbarContent justify="end">
+        <NavbarContent justify="end" className="gap-4 items-center">
           <NavbarItem className="hidden md:flex">
-            <Link href="/profile">Hi, {session.data.user?.email}</Link>
-          </NavbarItem>
-          <NavbarItem>
             <Button color="danger" variant="flat" onClick={() => signOut()}>
               Sign Out
             </Button>
+          </NavbarItem>
+          <NavbarItem className="px-1">
+            <Link
+              href="/profile"
+              className="md:border-3 hover:border-stone-400 border-primary rounded-full py-2 md:py-0"
+            >
+              <Avatar
+                href="/profile"
+                showFallback
+                name="A"
+                className="w-8 h-8 md:w-10 md:h-10 text-large object-contain"
+                src="https://images.pexels.com/photos/1270076/pexels-photo-1270076.jpeg?auto=compress&cs=tinysrgb&w=600"
+              />
+            </Link>
           </NavbarItem>
         </NavbarContent>
       )}
@@ -114,7 +125,7 @@ export default function NavBar() {
           </NavbarItem>
         </NavbarContent>
       )}
-
+      {/* Hamburger Menu */}
       <NavbarMenu className="dark">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
@@ -128,6 +139,18 @@ export default function NavBar() {
             </Link>
           </NavbarMenuItem>
         ))}
+        <NavbarMenuItem>
+          {session.status == "authenticated" && (
+            <Link
+              color="danger"
+              onClick={() => signOut()}
+              className="w-full"
+              size="lg"
+            >
+              Sign Out
+            </Link>
+          )}
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   );

@@ -1,11 +1,11 @@
-import { Avatar, Button, Card, CardHeader } from "@nextui-org/react";
+import { Avatar, Button, Card, CardBody, CardHeader } from "@nextui-org/react";
 import React from "react";
 import { FaCamera } from "react-icons/fa";
 
 const UserCard = ({ user }) => {
   return (
-    <Card className="py-2 my-1 px-2 md:px-0">
-      <CardHeader className="pb-1 pt-2 px-4 flex flex-col md:flex-row gap-5 items-center">
+    <Card className="py-2 my-2 md:my-2 px-2 md:px-0">
+      <CardHeader className="my-2 w-[90%] mx-auto flex flex-col md:flex-row gap-5 items-center">
         <Avatar
           isBordered
           color="primary"
@@ -33,6 +33,30 @@ const UserCard = ({ user }) => {
           </Button>
         </div>
       </CardHeader>
+      <CardBody className="hidden md:flex flex-row justify-evenly items-center bg-black my-2 w-[90%] mx-auto rounded-lg">
+        <div className="text-center w-1/4">
+          <p className="text-primary font-semibold text-6xl font-mono">
+            {user.orders.length}
+          </p>
+          <p className="text-zinc-400 text-sm font-extralight">orders so far</p>
+        </div>
+        <div className="text-center w-1/4">
+          <p className="text-primary font-semibold text-6xl font-mono">
+            {user.addresses.length}
+          </p>
+          <p className="text-zinc-400 text-sm font-extralight">
+            locations reached
+          </p>
+        </div>
+        <div className="text-center w-1/4">
+          <p className="text-primary font-semibold text-6xl font-mono">
+            {user.cart.length}
+          </p>
+          <p className="text-zinc-400 text-sm font-extralight">
+            items waiting in cart
+          </p>
+        </div>
+      </CardBody>
     </Card>
   );
 };
